@@ -1,6 +1,11 @@
 import React from 'react';
+import Button from './Button';
 
-const TaskField = () => {
+interface TaskFieldProps {
+  onAddTodo: (text: Todo['text']) => void,
+}
+
+const TaskField: React.FC<TaskFieldProps> = ({ onAddTodo }) => {
   const [text, setText] = React.useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -8,10 +13,23 @@ const TaskField = () => {
     setText(value)
   }
 
+  const addTodo = () => {
+    if (text) {
+      onAddTodo(text)
+      setText('')
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addTodo()
+    }
+  }
+
   return (
     <div className='todo__add-task'>
-      <input type="text" value={text} onChange={handleInputChange} placeholder='Введите текст ...' />
-      <button className='todo__button'>
+      <input type="text" onKeyDown={handleKeyDown} value={text} onChange={handleInputChange} placeholder='Введите текст ...' />
+      <Button onClick={addTodo} >
         <svg
           width="18"
           height="18"
@@ -23,7 +41,7 @@ const TaskField = () => {
             fill="#C7C7C7"
           />
         </svg>
-      </button>
+      </Button>
     </div>
   );
 };
