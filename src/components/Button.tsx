@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
-  which?: 'edit' | 'remove'
+  which?: 'edit' | 'remove' | 'save'
 }
 
 const Button: React.FC<ButtonProps> = ({ which, children, onClick }) => {

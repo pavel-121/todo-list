@@ -9,7 +9,7 @@ function App() {
     {
       id: 1,
       text: 'Изучение HTML',
-      completed: false
+      completed: true
     },
     {
       id: 2,
@@ -33,6 +33,17 @@ function App() {
     ])
   }
 
+  const onChangeTodo = (id: Todo['id'], value: string) => {
+    setTodos(
+      todos.map(todo => (
+        todo.id === id
+          ? { ...todo, text: value }
+          : todo
+      ))
+
+    )
+  }
+
   const onRemoveTodo = (id: Todo['id']) => {
     setTodos(todos.filter(todo => todo.id !== id))
   }
@@ -48,7 +59,7 @@ function App() {
     <div className='todo'>
       <Header />
       <TaskField onAddTodo={onAddTodo} />
-      <TodoList todos={todos} onRemoveTodo={onRemoveTodo} onToggleCompleted={onToggleCompleted} />
+      <TodoList todos={todos} onChangeTodo={onChangeTodo} onRemoveTodo={onRemoveTodo} onToggleCompleted={onToggleCompleted} />
     </div>
   );
 }
