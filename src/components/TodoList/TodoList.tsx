@@ -13,7 +13,7 @@ const TodoList: React.FC<TodoListPorps> = ({ todos, onChangeTodo, onRemoveTodo, 
     <div className='todo__list'>
       {!todos.length && (<p className='todo__empty'>Список пуст</p>)}
       {todos.map((todo) => (
-        <TodoItem todo={todo} onChangeTodo={onChangeTodo} onRemoveTodo={onRemoveTodo} onToggleCompleted={onToggleCompleted} />
+        <TodoItem key={todo.id} todo={todo} onChangeTodo={onChangeTodo} onRemoveTodo={onRemoveTodo} onToggleCompleted={onToggleCompleted} />
       ))}
     </div>
   );
